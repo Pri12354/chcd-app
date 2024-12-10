@@ -1070,17 +1070,45 @@ export function fetchMapIndexes() {
     session.close()
   });
 
-  //GET RELIGIOUS FAMILY LIST
-  const session3 = this.driver.session();
-  const query3 = `MATCH (r:Institution)-[]->(e:CorporateEntity) WHERE e.religious_family IS NOT NULL
-    RETURN DISTINCT {value:e.religious_family} AS List`
-  session3.run(query3).then((results) => {
-    const resultIndex3 = results.records.map((record) => record.get('List')); const addAll3 = [{ value: "All" }];
-    const relFamIndexPrep = addAll3.concat(resultIndex3);
-    const relFamIndex = relFamIndexPrep.map(i => ({ value: i.value, type: "religious_family" }));
-    this.setState({ relFamIndex });
-    session3.close()
-  });
+//   //GET RELIGIOUS FAMILY LIST
+  
+//   const session3 = this.driver.session();
+// const query3 = `
+//   MATCH (r:Institution)-[]->(e:CorporateEntity) 
+//   WHERE e.religious_family IS NOT NULL
+//   RETURN DISTINCT { value: e.religious_family } AS List
+// `;
+
+// session3.run(query3).then((results) => {
+//   // Map query results to extract the `value` field from each record's `List`
+//   const resultIndex3 = results.records.map((record) => record.get('List').value);
+
+//   // Log to check mapped results format
+//   console.log("Mapped Results:", resultIndex3);
+
+//   // Add "All" option at the beginning and map values for dropdown
+//   const relFamIndex = [
+//     { value: "All", type: "religious_family" },
+//     ...resultIndex3.map((value) => ({ value, type: "religious_family" }))
+//   ];
+
+
+
+//   // Update component state
+//   this.setState({ relFamIndex });
+
+//   console.log("Dropdown Options:", relFamIndex);
+
+
+//   // Close the session
+//   session3.close();
+// }).catch(error => {
+//   console.error("Error fetching religious family list:", error);
+//   session3.close();
+// });
+
+
+
 
   //GET CATEGORY AND SUBCATEGORY LISTS
   const session6 = this.driver.session();

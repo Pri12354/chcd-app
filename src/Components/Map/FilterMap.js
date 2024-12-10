@@ -11,7 +11,7 @@ import ReactTooltip from "react-tooltip";
 import locations from "../../Assets/indexes/location-index.json";
 import translate from "../../Assets/indexes/translate.json";
 import nationality from "../../Assets/indexes/nationality.json";
-import family_trans from "../../Assets/indexes/religious_family.json";
+import religiousFamilyData from "../../Assets/indexes/religious_family.json";
 import cat_trans from "../../Assets/indexes/categories.json";
 import '../../Styles/Css/map.css';
 
@@ -19,7 +19,11 @@ import '../../Styles/Css/map.css';
 // COMPONENT ////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
 function FilterMap(props) {
+  const { family_trans, relFamIndex } = religiousFamilyData;
+  
+
   // SETUP DATA  //////////////////////////////////////////////////////////////////////////////////////
 
   //NODE OPTIONS CALLBACK
@@ -479,6 +483,7 @@ function FilterMap(props) {
       defaultInput = translate[0]["type_to"][props.language];
     }
 
+
     return (
       <div className="filter_area">
         <div className={props.filterDisplay}>
@@ -666,21 +671,22 @@ function FilterMap(props) {
                         ]
                       }
                     </ReactTooltip>
+                    
                     <Select
                       name="religious_family"
                       aria-label={
                         translate[0]["religious_family"][props.language]
                       }
-                      placeholder={translate[0]["select"][props.language]}
-                      options={props.relFamIndex}
-                      getOptionLabel={(option) =>
-                        family_trans[0][
-                          option.value
-                            .replace(/\s+$/, "")
-                            .replace(/\s|\//g, "_")
-                            .toLowerCase()
-                        ][props.language]
-                      }
+                      placeholder={translate[0]["all"][props.language]}
+                      options={relFamIndex}
+                      getOptionLabel={(option) => {
+                        const lang = props.language; 
+                        const english = option.label.en; 
+                        const chinese = option.label.zh; 
+                        return chinese && chinese !== english 
+                          ? `${english} (${chinese})` 
+                          : english; 
+                      }}
                       onChange={(e) => props.handleChangeData(e)}
                       components={{ IndicatorSeparator: () => null }}
                     />

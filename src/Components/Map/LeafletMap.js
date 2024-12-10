@@ -58,9 +58,17 @@ const myIcon = L.icon({
 // COMPONENT ////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function LeafletMap(props) {
+const LeafletMap = (props) => {
+  useEffect(() => {
+    // ComponentDidMount-like code here
+    console.log('Map mounted');
 
-  const alert = useAlert()
+    return () => {
+      console.log('Map unmounted');
+      // ComponentWillUnmount-like code here
+      // react-leaflet automatically handles cleanup of the map and layers
+    };
+  }, []);
 
   //CONSTRUCT MAP
   const group = L.featureGroup();
@@ -79,6 +87,8 @@ function LeafletMap(props) {
     uniqueArray = props.nodeArray;
     heatArray = props.nodeArray;
   }
+
+  
 
    // TEMPLATES FOR POPUPS BASED ON NODE TYPE //////////////
    /////////////////////////////////////////////////////////

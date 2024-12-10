@@ -16,6 +16,7 @@ import * as helper from "../Utils/Helpers.js";
 import * as query from "../Utils/Queries.js";
 import translate from "../../Assets/indexes/translate.json"
 import { useLocation, useSearchParams } from 'react-router-dom';
+import religiousFamilyData from "../../Assets/indexes/religious_family.json";
 
 export function withRouter(Children){
   return(props)=>{
@@ -38,6 +39,7 @@ class MapView extends React.Component {
 
 //STATE CONSTRUCTOR ////////////////////////////////////////////////////////////////////////////////
   constructor(props) {
+    const { family_trans, relFamIndex } = religiousFamilyData;
 
     super(props);
     this.state = {
@@ -91,7 +93,7 @@ class MapView extends React.Component {
       // FORM SELECTS
       instCatsIndex: [],
       eventsCatsIndex: [],
-      relFamIndex: [],
+      relFamIndex: [family_trans], //add the relgious_family.json here
       affIndex: [],
       pAffIndex: [],
       natIndex: [],
@@ -103,6 +105,7 @@ class MapView extends React.Component {
       //MAP BOUNDS
       mapBounds: [[54.31,137.28],[18.312,71.63],]
     };
+
 
 //INITIATE NEO4J INSTANCE ///////////////////////////////////////////////////////////////////////////
     this.driver = neo4j.driver(

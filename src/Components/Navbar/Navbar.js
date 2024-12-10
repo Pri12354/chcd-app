@@ -23,6 +23,7 @@ function Navbar(props) {
 // RESPONSIVE, DROPDOWN CLICK HANDLER ///////////////////////////////////////////////////////////////
     const [click, setClick] = useState(false);
     const handleClick = () => {setClick(!click);};
+    console.log(props, "props of menu");
     const closeMobileMenu = () => {setClick(false)};
 
 // RESPONSIVE STYLING ///////////////////////////////////////////////////////////////////////////////
